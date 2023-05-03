@@ -1,0 +1,721 @@
+   1              		.arch armv7e-m
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 4
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"interrupts.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.align	1
+  18              		.global	Default_Handler
+  19              		.arch armv7e-m
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  23              		.fpu fpv4-sp-d16
+  24              		.type	Default_Handler, %function
+  25              	Default_Handler:
+  26              	.LFB0:
+  27              		.file 1 "src/boot/interrupts.c"
+   1:src/boot/interrupts.c **** 
+   2:src/boot/interrupts.c **** /* We define interrupt handlers as weak aliases to Default_Handler */
+   3:src/boot/interrupts.c **** 
+   4:src/boot/interrupts.c **** void Default_Handler() { while(1); }
+  28              		.loc 1 4 24 view -0
+  29              		.cfi_startproc
+  30              		@ Volatile: function does not return.
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33              		@ link register save eliminated.
+  34              	.L2:
+  35              		.loc 1 4 26 discriminator 1 view .LVU1
+  36              		.loc 1 4 34 discriminator 1 view .LVU2
+  37              		.loc 1 4 31 discriminator 1 view .LVU3
+  38 0000 FEE7     		b	.L2
+  39              		.cfi_endproc
+  40              	.LFE0:
+  41              		.size	Default_Handler, .-Default_Handler
+  42              		.weak	FMPI2C1_error_Handler
+  43              		.thumb_set FMPI2C1_error_Handler,Default_Handler
+  44              		.weak	FMPI2C1_Handler
+  45              		.thumb_set FMPI2C1_Handler,Default_Handler
+  46              		.weak	SPDIF_Rx_Handler
+  47              		.thumb_set SPDIF_Rx_Handler,Default_Handler
+  48              		.weak	HDMI_CEC_Handler
+  49              		.thumb_set HDMI_CEC_Handler,Default_Handler
+  50              		.weak	QuadSPI_Handler
+  51              		.thumb_set QuadSPI_Handler,Default_Handler
+  52              		.weak	SAI2_Handler
+  53              		.thumb_set SAI2_Handler,Default_Handler
+  54              		.weak	SAI1_Handler
+  55              		.thumb_set SAI1_Handler,Default_Handler
+  56              		.weak	SPI4_Handler
+  57              		.thumb_set SPI4_Handler,Default_Handler
+  58              		.weak	FPU_Handler
+  59              		.thumb_set FPU_Handler,Default_Handler
+  60              		.weak	DCMI_Handler
+  61              		.thumb_set DCMI_Handler,Default_Handler
+  62              		.weak	OTG_HS_Handler
+  63              		.thumb_set OTG_HS_Handler,Default_Handler
+  64              		.weak	OTG_HS_WKUP_Handler
+  65              		.thumb_set OTG_HS_WKUP_Handler,Default_Handler
+  66              		.weak	OTG_HS_EP1_IN_Handler
+  67              		.thumb_set OTG_HS_EP1_IN_Handler,Default_Handler
+  68              		.weak	OTG_HS_EP1_OUT_Handler
+  69              		.thumb_set OTG_HS_EP1_OUT_Handler,Default_Handler
+  70              		.weak	I2C3_ER_Handler
+  71              		.thumb_set I2C3_ER_Handler,Default_Handler
+  72              		.weak	I2C3_EV_Handler
+  73              		.thumb_set I2C3_EV_Handler,Default_Handler
+  74              		.weak	USART6_Handler
+  75              		.thumb_set USART6_Handler,Default_Handler
+  76              		.weak	DMA2_Stream7_Handler
+  77              		.thumb_set DMA2_Stream7_Handler,Default_Handler
+  78              		.weak	DMA2_Stream6_Handler
+  79              		.thumb_set DMA2_Stream6_Handler,Default_Handler
+  80              		.weak	DMA2_Stream5_Handler
+  81              		.thumb_set DMA2_Stream5_Handler,Default_Handler
+  82              		.weak	OTG_FS_Handler
+  83              		.thumb_set OTG_FS_Handler,Default_Handler
+  84              		.weak	CAN2_SCE_Handler
+  85              		.thumb_set CAN2_SCE_Handler,Default_Handler
+  86              		.weak	CAN2_RX1_Handler
+  87              		.thumb_set CAN2_RX1_Handler,Default_Handler
+  88              		.weak	CAN2_RX0_Handler
+  89              		.thumb_set CAN2_RX0_Handler,Default_Handler
+  90              		.weak	CAN2_TX_Handler
+  91              		.thumb_set CAN2_TX_Handler,Default_Handler
+  92              		.weak	DMA2_Stream4_Handler
+  93              		.thumb_set DMA2_Stream4_Handler,Default_Handler
+  94              		.weak	DMA2_Stream3_Handler
+  95              		.thumb_set DMA2_Stream3_Handler,Default_Handler
+  96              		.weak	DMA2_Stream2_Handler
+  97              		.thumb_set DMA2_Stream2_Handler,Default_Handler
+  98              		.weak	DMA2_Stream1_Handler
+  99              		.thumb_set DMA2_Stream1_Handler,Default_Handler
+ 100              		.weak	DMA2_Stream0_Handler
+ 101              		.thumb_set DMA2_Stream0_Handler,Default_Handler
+ 102              		.weak	TIM7_Handler
+ 103              		.thumb_set TIM7_Handler,Default_Handler
+ 104              		.weak	TIM6_DAC_Handler
+ 105              		.thumb_set TIM6_DAC_Handler,Default_Handler
+ 106              		.weak	UART5_Handler
+ 107              		.thumb_set UART5_Handler,Default_Handler
+ 108              		.weak	UART4_Handler
+ 109              		.thumb_set UART4_Handler,Default_Handler
+ 110              		.weak	SPI3_Handler
+ 111              		.thumb_set SPI3_Handler,Default_Handler
+ 112              		.weak	TIM5_Handler
+ 113              		.thumb_set TIM5_Handler,Default_Handler
+ 114              		.weak	SDIO_Handler
+ 115              		.thumb_set SDIO_Handler,Default_Handler
+ 116              		.weak	FMC_Handler
+ 117              		.thumb_set FMC_Handler,Default_Handler
+ 118              		.weak	DMA1_Stream7_Handler
+ 119              		.thumb_set DMA1_Stream7_Handler,Default_Handler
+ 120              		.weak	TIM8_CC_Handler
+ 121              		.thumb_set TIM8_CC_Handler,Default_Handler
+ 122              		.weak	TIM8_TRG_COM_TIM14_Handler
+ 123              		.thumb_set TIM8_TRG_COM_TIM14_Handler,Default_Handler
+ 124              		.weak	TIM8_UP_TIM13_Handler
+ 125              		.thumb_set TIM8_UP_TIM13_Handler,Default_Handler
+ 126              		.weak	TIM8_BRK_TIM12_Handler
+ 127              		.thumb_set TIM8_BRK_TIM12_Handler,Default_Handler
+ 128              		.weak	OTG_FS_WKUP_Handler
+ 129              		.thumb_set OTG_FS_WKUP_Handler,Default_Handler
+ 130              		.weak	RTC_Alarm_Handler
+ 131              		.thumb_set RTC_Alarm_Handler,Default_Handler
+ 132              		.weak	EXTI15_10_Handler
+ 133              		.thumb_set EXTI15_10_Handler,Default_Handler
+ 134              		.weak	USART3_Handler
+ 135              		.thumb_set USART3_Handler,Default_Handler
+ 136              		.weak	USART2_Handler
+ 137              		.thumb_set USART2_Handler,Default_Handler
+ 138              		.weak	USART1_Handler
+ 139              		.thumb_set USART1_Handler,Default_Handler
+ 140              		.weak	SPI2_Handler
+ 141              		.thumb_set SPI2_Handler,Default_Handler
+ 142              		.weak	SPI1_Handler
+ 143              		.thumb_set SPI1_Handler,Default_Handler
+ 144              		.weak	I2C2_ER_Handler
+ 145              		.thumb_set I2C2_ER_Handler,Default_Handler
+ 146              		.weak	I2C2_EV_Handler
+ 147              		.thumb_set I2C2_EV_Handler,Default_Handler
+ 148              		.weak	I2C1_ER_Handler
+ 149              		.thumb_set I2C1_ER_Handler,Default_Handler
+ 150              		.weak	I2C1_EV_Handler
+ 151              		.thumb_set I2C1_EV_Handler,Default_Handler
+ 152              		.weak	TIM4_Handler
+ 153              		.thumb_set TIM4_Handler,Default_Handler
+ 154              		.weak	TIM3_Handler
+ 155              		.thumb_set TIM3_Handler,Default_Handler
+ 156              		.weak	TIM2_Handler
+ 157              		.thumb_set TIM2_Handler,Default_Handler
+ 158              		.weak	TIM1_CC_Handler
+ 159              		.thumb_set TIM1_CC_Handler,Default_Handler
+ 160              		.weak	TIM1_TRG_COM_TIM11_Handler
+ 161              		.thumb_set TIM1_TRG_COM_TIM11_Handler,Default_Handler
+ 162              		.weak	TIM1_UP_TIM10_Handler
+ 163              		.thumb_set TIM1_UP_TIM10_Handler,Default_Handler
+ 164              		.weak	TIM1_BRK_TIM9_Handler
+ 165              		.thumb_set TIM1_BRK_TIM9_Handler,Default_Handler
+ 166              		.weak	EXTI9_5_Handler
+ 167              		.thumb_set EXTI9_5_Handler,Default_Handler
+ 168              		.weak	CAN1_SCE_Handler
+ 169              		.thumb_set CAN1_SCE_Handler,Default_Handler
+ 170              		.weak	CAN1_RX1_Handler
+ 171              		.thumb_set CAN1_RX1_Handler,Default_Handler
+ 172              		.weak	CAN1_RX0_Handler
+ 173              		.thumb_set CAN1_RX0_Handler,Default_Handler
+ 174              		.weak	CAN1_TX_Handler
+ 175              		.thumb_set CAN1_TX_Handler,Default_Handler
+ 176              		.weak	ADC_Handler
+ 177              		.thumb_set ADC_Handler,Default_Handler
+ 178              		.weak	DMA1_Stream6_Handler
+ 179              		.thumb_set DMA1_Stream6_Handler,Default_Handler
+ 180              		.weak	DMA1_Stream5_Handler
+ 181              		.thumb_set DMA1_Stream5_Handler,Default_Handler
+ 182              		.weak	DMA1_Stream4_Handler
+ 183              		.thumb_set DMA1_Stream4_Handler,Default_Handler
+ 184              		.weak	DMA1_Stream3_Handler
+ 185              		.thumb_set DMA1_Stream3_Handler,Default_Handler
+ 186              		.weak	DMA1_Stream2_Handler
+ 187              		.thumb_set DMA1_Stream2_Handler,Default_Handler
+ 188              		.weak	DMA1_Stream1_Handler
+ 189              		.thumb_set DMA1_Stream1_Handler,Default_Handler
+ 190              		.weak	DMA1_Stream0_Handler
+ 191              		.thumb_set DMA1_Stream0_Handler,Default_Handler
+ 192              		.weak	EXTI4_Handler
+ 193              		.thumb_set EXTI4_Handler,Default_Handler
+ 194              		.weak	EXTI3_Handler
+ 195              		.thumb_set EXTI3_Handler,Default_Handler
+ 196              		.weak	EXTI2_Handler
+ 197              		.thumb_set EXTI2_Handler,Default_Handler
+ 198              		.weak	EXTI1_Handler
+ 199              		.thumb_set EXTI1_Handler,Default_Handler
+ 200              		.weak	EXTI0_Handler
+ 201              		.thumb_set EXTI0_Handler,Default_Handler
+ 202              		.weak	RCC_Handler
+ 203              		.thumb_set RCC_Handler,Default_Handler
+ 204              		.weak	FLASH_Handler
+ 205              		.thumb_set FLASH_Handler,Default_Handler
+ 206              		.weak	RTC_WKUP_Handler
+ 207              		.thumb_set RTC_WKUP_Handler,Default_Handler
+ 208              		.weak	TAMP_STAMP_Handler
+ 209              		.thumb_set TAMP_STAMP_Handler,Default_Handler
+ 210              		.weak	PVD_Handler
+ 211              		.thumb_set PVD_Handler,Default_Handler
+ 212              		.weak	WWDG_Handler
+ 213              		.thumb_set WWDG_Handler,Default_Handler
+ 214              		.weak	SysTick_Handler
+ 215              		.thumb_set SysTick_Handler,Default_Handler
+ 216              		.weak	PendSV_Handler
+ 217              		.thumb_set PendSV_Handler,Default_Handler
+ 218              		.weak	Debug_Monitor_Handler
+ 219              		.thumb_set Debug_Monitor_Handler,Default_Handler
+ 220              		.weak	SVCall_Handler
+ 221              		.thumb_set SVCall_Handler,Default_Handler
+ 222              		.weak	UsageFault_Handler
+ 223              		.thumb_set UsageFault_Handler,Default_Handler
+ 224              		.weak	BusFault_Handler
+ 225              		.thumb_set BusFault_Handler,Default_Handler
+ 226              		.weak	MemManage_Handler
+ 227              		.thumb_set MemManage_Handler,Default_Handler
+ 228              		.weak	HardFault_Handler
+ 229              		.thumb_set HardFault_Handler,Default_Handler
+ 230              		.weak	NMI_Handler
+ 231              		.thumb_set NMI_Handler,Default_Handler
+ 232              		.global	__interrupt_vector
+ 233              		.section	interrupt_vector,"a"
+ 234              		.align	2
+ 235              		.type	__interrupt_vector, %object
+ 236              		.size	__interrupt_vector, 444
+ 237              	__interrupt_vector:
+ 238 0000 00000000 		.word	NMI_Handler
+ 239 0004 00000000 		.word	HardFault_Handler
+ 240 0008 00000000 		.word	MemManage_Handler
+ 241 000c 00000000 		.word	BusFault_Handler
+ 242 0010 00000000 		.word	UsageFault_Handler
+ 243 0014 00000000 		.word	0
+ 244 0018 00000000 		.word	0
+ 245 001c 00000000 		.word	0
+ 246 0020 00000000 		.word	0
+ 247 0024 00000000 		.word	SVCall_Handler
+ 248 0028 00000000 		.word	Debug_Monitor_Handler
+ 249 002c 00000000 		.word	0
+ 250 0030 00000000 		.word	PendSV_Handler
+ 251 0034 00000000 		.word	SysTick_Handler
+ 252 0038 00000000 		.word	WWDG_Handler
+ 253 003c 00000000 		.word	PVD_Handler
+ 254 0040 00000000 		.word	TAMP_STAMP_Handler
+ 255 0044 00000000 		.word	RTC_WKUP_Handler
+ 256 0048 00000000 		.word	FLASH_Handler
+ 257 004c 00000000 		.word	RCC_Handler
+ 258 0050 00000000 		.word	EXTI0_Handler
+ 259 0054 00000000 		.word	EXTI1_Handler
+ 260 0058 00000000 		.word	EXTI2_Handler
+ 261 005c 00000000 		.word	EXTI3_Handler
+ 262 0060 00000000 		.word	EXTI4_Handler
+ 263 0064 00000000 		.word	DMA1_Stream0_Handler
+ 264 0068 00000000 		.word	DMA1_Stream1_Handler
+ 265 006c 00000000 		.word	DMA1_Stream2_Handler
+ 266 0070 00000000 		.word	DMA1_Stream3_Handler
+ 267 0074 00000000 		.word	DMA1_Stream4_Handler
+ 268 0078 00000000 		.word	DMA1_Stream5_Handler
+ 269 007c 00000000 		.word	DMA1_Stream6_Handler
+ 270 0080 00000000 		.word	ADC_Handler
+ 271 0084 00000000 		.word	CAN1_TX_Handler
+ 272 0088 00000000 		.word	CAN1_RX0_Handler
+ 273 008c 00000000 		.word	CAN1_RX1_Handler
+ 274 0090 00000000 		.word	CAN1_SCE_Handler
+ 275 0094 00000000 		.word	EXTI9_5_Handler
+ 276 0098 00000000 		.word	TIM1_BRK_TIM9_Handler
+ 277 009c 00000000 		.word	TIM1_UP_TIM10_Handler
+ 278 00a0 00000000 		.word	TIM1_TRG_COM_TIM11_Handler
+ 279 00a4 00000000 		.word	TIM1_CC_Handler
+ 280 00a8 00000000 		.word	TIM2_Handler
+ 281 00ac 00000000 		.word	TIM3_Handler
+ 282 00b0 00000000 		.word	TIM4_Handler
+ 283 00b4 00000000 		.word	I2C1_EV_Handler
+ 284 00b8 00000000 		.word	I2C1_ER_Handler
+ 285 00bc 00000000 		.word	I2C2_EV_Handler
+ 286 00c0 00000000 		.word	I2C2_ER_Handler
+ 287 00c4 00000000 		.word	SPI1_Handler
+ 288 00c8 00000000 		.word	SPI2_Handler
+ 289 00cc 00000000 		.word	USART1_Handler
+ 290 00d0 00000000 		.word	USART2_Handler
+ 291 00d4 00000000 		.word	USART3_Handler
+ 292 00d8 00000000 		.word	EXTI15_10_Handler
+ 293 00dc 00000000 		.word	RTC_Alarm_Handler
+ 294 00e0 00000000 		.word	OTG_FS_WKUP_Handler
+ 295 00e4 00000000 		.word	TIM8_BRK_TIM12_Handler
+ 296 00e8 00000000 		.word	TIM8_UP_TIM13_Handler
+ 297 00ec 00000000 		.word	TIM8_TRG_COM_TIM14_Handler
+ 298 00f0 00000000 		.word	TIM8_CC_Handler
+ 299 00f4 00000000 		.word	DMA1_Stream7_Handler
+ 300 00f8 00000000 		.word	FMC_Handler
+ 301 00fc 00000000 		.word	SDIO_Handler
+ 302 0100 00000000 		.word	TIM5_Handler
+ 303 0104 00000000 		.word	SPI3_Handler
+ 304 0108 00000000 		.word	UART4_Handler
+ 305 010c 00000000 		.word	UART5_Handler
+ 306 0110 00000000 		.word	TIM6_DAC_Handler
+ 307 0114 00000000 		.word	TIM7_Handler
+ 308 0118 00000000 		.word	DMA2_Stream0_Handler
+ 309 011c 00000000 		.word	DMA2_Stream1_Handler
+ 310 0120 00000000 		.word	DMA2_Stream2_Handler
+ 311 0124 00000000 		.word	DMA2_Stream3_Handler
+ 312 0128 00000000 		.word	DMA2_Stream4_Handler
+ 313 012c 00000000 		.word	0
+ 314 0130 00000000 		.word	0
+ 315 0134 00000000 		.word	CAN2_TX_Handler
+ 316 0138 00000000 		.word	CAN2_RX0_Handler
+ 317 013c 00000000 		.word	CAN2_RX1_Handler
+ 318 0140 00000000 		.word	CAN2_SCE_Handler
+ 319 0144 00000000 		.word	OTG_FS_Handler
+ 320 0148 00000000 		.word	DMA2_Stream5_Handler
+ 321 014c 00000000 		.word	DMA2_Stream6_Handler
+ 322 0150 00000000 		.word	DMA2_Stream7_Handler
+ 323 0154 00000000 		.word	USART6_Handler
+ 324 0158 00000000 		.word	I2C3_EV_Handler
+ 325 015c 00000000 		.word	I2C3_ER_Handler
+ 326 0160 00000000 		.word	OTG_HS_EP1_OUT_Handler
+ 327 0164 00000000 		.word	OTG_HS_EP1_IN_Handler
+ 328 0168 00000000 		.word	OTG_HS_WKUP_Handler
+ 329 016c 00000000 		.word	OTG_HS_Handler
+ 330 0170 00000000 		.word	DCMI_Handler
+ 331 0174 00000000 		.word	0
+ 332 0178 00000000 		.word	0
+ 333 017c 00000000 		.word	FPU_Handler
+ 334 0180 00000000 		.word	0
+ 335 0184 00000000 		.word	0
+ 336 0188 00000000 		.word	SPI4_Handler
+ 337 018c 00000000 		.word	0
+ 338 0190 00000000 		.word	0
+ 339 0194 00000000 		.word	SAI1_Handler
+ 340 0198 00000000 		.word	0
+ 341 019c 00000000 		.word	0
+ 342 01a0 00000000 		.word	0
+ 343 01a4 00000000 		.word	SAI2_Handler
+ 344 01a8 00000000 		.word	QuadSPI_Handler
+ 345 01ac 00000000 		.word	HDMI_CEC_Handler
+ 346 01b0 00000000 		.word	SPDIF_Rx_Handler
+ 347 01b4 00000000 		.word	FMPI2C1_Handler
+ 348 01b8 00000000 		.word	FMPI2C1_error_Handler
+ 349              		.text
+ 350              	.Letext0:
+ 351              		.section	.debug_info,"",%progbits
+ 352              	.Ldebug_info0:
+ 353 0000 80000000 		.4byte	0x80
+ 354 0004 0400     		.2byte	0x4
+ 355 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 356 000a 04       		.byte	0x4
+ 357 000b 01       		.uleb128 0x1
+ 358 000c 53000000 		.4byte	.LASF0
+ 359 0010 0C       		.byte	0xc
+ 360 0011 F6000000 		.4byte	.LASF1
+ 361 0015 30000000 		.4byte	.LASF2
+ 362 0019 00000000 		.4byte	.Ltext0
+ 363 001d 02000000 		.4byte	.Letext0-.Ltext0
+ 364 0021 00000000 		.4byte	.Ldebug_line0
+ 365 0025 02       		.uleb128 0x2
+ 366 0026 69737200 		.ascii	"isr\000"
+ 367 002a 01       		.byte	0x1
+ 368 002b CF       		.byte	0xcf
+ 369 002c 10       		.byte	0x10
+ 370 002d 36000000 		.4byte	0x36
+ 371 0031 03       		.uleb128 0x3
+ 372 0032 25000000 		.4byte	0x25
+ 373 0036 04       		.uleb128 0x4
+ 374 0037 04       		.byte	0x4
+ 375 0038 3C000000 		.4byte	0x3c
+ 376 003c 05       		.uleb128 0x5
+ 377 003d 43000000 		.4byte	0x43
+ 378 0041 06       		.uleb128 0x6
+ 379 0042 00       		.byte	0
+ 380 0043 07       		.uleb128 0x7
+ 381 0044 31000000 		.4byte	0x31
+ 382 0048 53000000 		.4byte	0x53
+ 383 004c 08       		.uleb128 0x8
+ 384 004d 58000000 		.4byte	0x58
+ 385 0051 6E       		.byte	0x6e
+ 386 0052 00       		.byte	0
+ 387 0053 03       		.uleb128 0x3
+ 388 0054 43000000 		.4byte	0x43
+ 389 0058 09       		.uleb128 0x9
+ 390 0059 04       		.byte	0x4
+ 391 005a 07       		.byte	0x7
+ 392 005b 00000000 		.4byte	.LASF3
+ 393 005f 0A       		.uleb128 0xa
+ 394 0060 0D000000 		.4byte	.LASF4
+ 395 0064 01       		.byte	0x1
+ 396 0065 D2       		.byte	0xd2
+ 397 0066 05       		.byte	0x5
+ 398 0067 53000000 		.4byte	0x53
+ 399 006b 05       		.uleb128 0x5
+ 400 006c 03       		.byte	0x3
+ 401 006d 00000000 		.4byte	__interrupt_vector
+ 402 0071 0B       		.uleb128 0xb
+ 403 0072 20000000 		.4byte	.LASF5
+ 404 0076 01       		.byte	0x1
+ 405 0077 04       		.byte	0x4
+ 406 0078 06       		.byte	0x6
+ 407 0079 00000000 		.4byte	.LFB0
+ 408 007d 02000000 		.4byte	.LFE0-.LFB0
+ 409 0081 01       		.uleb128 0x1
+ 410 0082 9C       		.byte	0x9c
+ 411 0083 00       		.byte	0
+ 412              		.section	.debug_abbrev,"",%progbits
+ 413              	.Ldebug_abbrev0:
+ 414 0000 01       		.uleb128 0x1
+ 415 0001 11       		.uleb128 0x11
+ 416 0002 01       		.byte	0x1
+ 417 0003 25       		.uleb128 0x25
+ 418 0004 0E       		.uleb128 0xe
+ 419 0005 13       		.uleb128 0x13
+ 420 0006 0B       		.uleb128 0xb
+ 421 0007 03       		.uleb128 0x3
+ 422 0008 0E       		.uleb128 0xe
+ 423 0009 1B       		.uleb128 0x1b
+ 424 000a 0E       		.uleb128 0xe
+ 425 000b 11       		.uleb128 0x11
+ 426 000c 01       		.uleb128 0x1
+ 427 000d 12       		.uleb128 0x12
+ 428 000e 06       		.uleb128 0x6
+ 429 000f 10       		.uleb128 0x10
+ 430 0010 17       		.uleb128 0x17
+ 431 0011 00       		.byte	0
+ 432 0012 00       		.byte	0
+ 433 0013 02       		.uleb128 0x2
+ 434 0014 16       		.uleb128 0x16
+ 435 0015 00       		.byte	0
+ 436 0016 03       		.uleb128 0x3
+ 437 0017 08       		.uleb128 0x8
+ 438 0018 3A       		.uleb128 0x3a
+ 439 0019 0B       		.uleb128 0xb
+ 440 001a 3B       		.uleb128 0x3b
+ 441 001b 0B       		.uleb128 0xb
+ 442 001c 39       		.uleb128 0x39
+ 443 001d 0B       		.uleb128 0xb
+ 444 001e 49       		.uleb128 0x49
+ 445 001f 13       		.uleb128 0x13
+ 446 0020 00       		.byte	0
+ 447 0021 00       		.byte	0
+ 448 0022 03       		.uleb128 0x3
+ 449 0023 26       		.uleb128 0x26
+ 450 0024 00       		.byte	0
+ 451 0025 49       		.uleb128 0x49
+ 452 0026 13       		.uleb128 0x13
+ 453 0027 00       		.byte	0
+ 454 0028 00       		.byte	0
+ 455 0029 04       		.uleb128 0x4
+ 456 002a 0F       		.uleb128 0xf
+ 457 002b 00       		.byte	0
+ 458 002c 0B       		.uleb128 0xb
+ 459 002d 0B       		.uleb128 0xb
+ 460 002e 49       		.uleb128 0x49
+ 461 002f 13       		.uleb128 0x13
+ 462 0030 00       		.byte	0
+ 463 0031 00       		.byte	0
+ 464 0032 05       		.uleb128 0x5
+ 465 0033 15       		.uleb128 0x15
+ 466 0034 01       		.byte	0x1
+ 467 0035 01       		.uleb128 0x1
+ 468 0036 13       		.uleb128 0x13
+ 469 0037 00       		.byte	0
+ 470 0038 00       		.byte	0
+ 471 0039 06       		.uleb128 0x6
+ 472 003a 18       		.uleb128 0x18
+ 473 003b 00       		.byte	0
+ 474 003c 00       		.byte	0
+ 475 003d 00       		.byte	0
+ 476 003e 07       		.uleb128 0x7
+ 477 003f 01       		.uleb128 0x1
+ 478 0040 01       		.byte	0x1
+ 479 0041 49       		.uleb128 0x49
+ 480 0042 13       		.uleb128 0x13
+ 481 0043 01       		.uleb128 0x1
+ 482 0044 13       		.uleb128 0x13
+ 483 0045 00       		.byte	0
+ 484 0046 00       		.byte	0
+ 485 0047 08       		.uleb128 0x8
+ 486 0048 21       		.uleb128 0x21
+ 487 0049 00       		.byte	0
+ 488 004a 49       		.uleb128 0x49
+ 489 004b 13       		.uleb128 0x13
+ 490 004c 2F       		.uleb128 0x2f
+ 491 004d 0B       		.uleb128 0xb
+ 492 004e 00       		.byte	0
+ 493 004f 00       		.byte	0
+ 494 0050 09       		.uleb128 0x9
+ 495 0051 24       		.uleb128 0x24
+ 496 0052 00       		.byte	0
+ 497 0053 0B       		.uleb128 0xb
+ 498 0054 0B       		.uleb128 0xb
+ 499 0055 3E       		.uleb128 0x3e
+ 500 0056 0B       		.uleb128 0xb
+ 501 0057 03       		.uleb128 0x3
+ 502 0058 0E       		.uleb128 0xe
+ 503 0059 00       		.byte	0
+ 504 005a 00       		.byte	0
+ 505 005b 0A       		.uleb128 0xa
+ 506 005c 34       		.uleb128 0x34
+ 507 005d 00       		.byte	0
+ 508 005e 03       		.uleb128 0x3
+ 509 005f 0E       		.uleb128 0xe
+ 510 0060 3A       		.uleb128 0x3a
+ 511 0061 0B       		.uleb128 0xb
+ 512 0062 3B       		.uleb128 0x3b
+ 513 0063 0B       		.uleb128 0xb
+ 514 0064 39       		.uleb128 0x39
+ 515 0065 0B       		.uleb128 0xb
+ 516 0066 49       		.uleb128 0x49
+ 517 0067 13       		.uleb128 0x13
+ 518 0068 3F       		.uleb128 0x3f
+ 519 0069 19       		.uleb128 0x19
+ 520 006a 02       		.uleb128 0x2
+ 521 006b 18       		.uleb128 0x18
+ 522 006c 00       		.byte	0
+ 523 006d 00       		.byte	0
+ 524 006e 0B       		.uleb128 0xb
+ 525 006f 2E       		.uleb128 0x2e
+ 526 0070 00       		.byte	0
+ 527 0071 3F       		.uleb128 0x3f
+ 528 0072 19       		.uleb128 0x19
+ 529 0073 03       		.uleb128 0x3
+ 530 0074 0E       		.uleb128 0xe
+ 531 0075 3A       		.uleb128 0x3a
+ 532 0076 0B       		.uleb128 0xb
+ 533 0077 3B       		.uleb128 0x3b
+ 534 0078 0B       		.uleb128 0xb
+ 535 0079 39       		.uleb128 0x39
+ 536 007a 0B       		.uleb128 0xb
+ 537 007b 11       		.uleb128 0x11
+ 538 007c 01       		.uleb128 0x1
+ 539 007d 12       		.uleb128 0x12
+ 540 007e 06       		.uleb128 0x6
+ 541 007f 40       		.uleb128 0x40
+ 542 0080 18       		.uleb128 0x18
+ 543 0081 9742     		.uleb128 0x2117
+ 544 0083 19       		.uleb128 0x19
+ 545 0084 00       		.byte	0
+ 546 0085 00       		.byte	0
+ 547 0086 00       		.byte	0
+ 548              		.section	.debug_aranges,"",%progbits
+ 549 0000 1C000000 		.4byte	0x1c
+ 550 0004 0200     		.2byte	0x2
+ 551 0006 00000000 		.4byte	.Ldebug_info0
+ 552 000a 04       		.byte	0x4
+ 553 000b 00       		.byte	0
+ 554 000c 0000     		.2byte	0
+ 555 000e 0000     		.2byte	0
+ 556 0010 00000000 		.4byte	.Ltext0
+ 557 0014 02000000 		.4byte	.Letext0-.Ltext0
+ 558 0018 00000000 		.4byte	0
+ 559 001c 00000000 		.4byte	0
+ 560              		.section	.debug_line,"",%progbits
+ 561              	.Ldebug_line0:
+ 562 0000 56000000 		.section	.debug_str,"MS",%progbits,1
+ 562      03002C00 
+ 562      00000201 
+ 562      FB0E0D00 
+ 562      01010101 
+ 563              	.LASF3:
+ 564 0000 756E7369 		.ascii	"unsigned int\000"
+ 564      676E6564 
+ 564      20696E74 
+ 564      00
+ 565              	.LASF4:
+ 566 000d 5F5F696E 		.ascii	"__interrupt_vector\000"
+ 566      74657272 
+ 566      7570745F 
+ 566      76656374 
+ 566      6F7200
+ 567              	.LASF5:
+ 568 0020 44656661 		.ascii	"Default_Handler\000"
+ 568      756C745F 
+ 568      48616E64 
+ 568      6C657200 
+ 569              	.LASF2:
+ 570 0030 2F686F6D 		.ascii	"/home/asmaelkb/ProjetSPC/TP_PROJET\000"
+ 570      652F6173 
+ 570      6D61656C 
+ 570      6B622F50 
+ 570      726F6A65 
+ 571              	.LASF0:
+ 572 0053 474E5520 		.ascii	"GNU C99 10.3.1 20210621 (release) -mtune=cortex-m4 "
+ 572      43393920 
+ 572      31302E33 
+ 572      2E312032 
+ 572      30323130 
+ 573 0086 2D6D7468 		.ascii	"-mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -march=a"
+ 573      756D6220 
+ 573      2D6D666C 
+ 573      6F61742D 
+ 573      6162693D 
+ 574 00b9 726D7637 		.ascii	"rmv7e-m+fp -g -O0 -Os -std=gnu99 -fsingle-precision"
+ 574      652D6D2B 
+ 574      6670202D 
+ 574      67202D4F 
+ 574      30202D4F 
+ 575 00ec 2D636F6E 		.ascii	"-constant\000"
+ 575      7374616E 
+ 575      7400
+ 576              	.LASF1:
+ 577 00f6 7372632F 		.ascii	"src/boot/interrupts.c\000"
+ 577      626F6F74 
+ 577      2F696E74 
+ 577      65727275 
+ 577      7074732E 
+ 578              		.ident	"GCC: (15:10.3-2021.07-4) 10.3.1 20210621 (release)"
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 interrupts.c
+     /tmp/cc9iqtJa.s:17     .text:0000000000000000 $t
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 Default_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 FMPI2C1_error_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 FMPI2C1_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 SPDIF_Rx_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 HDMI_CEC_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 QuadSPI_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 SAI2_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 SAI1_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 SPI4_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 FPU_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 DCMI_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 OTG_HS_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 OTG_HS_WKUP_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 OTG_HS_EP1_IN_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 OTG_HS_EP1_OUT_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 I2C3_ER_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 I2C3_EV_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 USART6_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 DMA2_Stream7_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 DMA2_Stream6_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 DMA2_Stream5_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 OTG_FS_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 CAN2_SCE_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 CAN2_RX1_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 CAN2_RX0_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 CAN2_TX_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 DMA2_Stream4_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 DMA2_Stream3_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 DMA2_Stream2_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 DMA2_Stream1_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 DMA2_Stream0_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 TIM7_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 TIM6_DAC_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 UART5_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 UART4_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 SPI3_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 TIM5_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 SDIO_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 FMC_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 DMA1_Stream7_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 TIM8_CC_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 TIM8_TRG_COM_TIM14_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 TIM8_UP_TIM13_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 TIM8_BRK_TIM12_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 OTG_FS_WKUP_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 RTC_Alarm_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 EXTI15_10_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 USART3_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 USART2_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 USART1_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 SPI2_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 SPI1_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 I2C2_ER_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 I2C2_EV_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 I2C1_ER_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 I2C1_EV_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 TIM4_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 TIM3_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 TIM2_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 TIM1_CC_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 TIM1_TRG_COM_TIM11_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 TIM1_UP_TIM10_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 TIM1_BRK_TIM9_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 EXTI9_5_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 CAN1_SCE_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 CAN1_RX1_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 CAN1_RX0_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 CAN1_TX_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 ADC_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 DMA1_Stream6_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 DMA1_Stream5_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 DMA1_Stream4_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 DMA1_Stream3_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 DMA1_Stream2_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 DMA1_Stream1_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 DMA1_Stream0_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 EXTI4_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 EXTI3_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 EXTI2_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 EXTI1_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 EXTI0_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 RCC_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 FLASH_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 RTC_WKUP_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 TAMP_STAMP_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 PVD_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 WWDG_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 SysTick_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 PendSV_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 Debug_Monitor_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 SVCall_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 UsageFault_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 BusFault_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 MemManage_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 HardFault_Handler
+     /tmp/cc9iqtJa.s:25     .text:0000000000000000 NMI_Handler
+     /tmp/cc9iqtJa.s:237    interrupt_vector:0000000000000000 __interrupt_vector
+     /tmp/cc9iqtJa.s:234    interrupt_vector:0000000000000000 $d
+
+NO UNDEFINED SYMBOLS

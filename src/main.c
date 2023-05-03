@@ -7,6 +7,11 @@
 #include "sys/init.h"
 #include "sys/clock.h"
 
+//condition : taille de chaque seqquence est minimum egale a 4 maximum egale a 8
+char liste [5][8]={"rbvm","rmvbm","brbrmb","vmrmvr","brmbrrvm"};
+char* mot; 
+
+
 void init_LD1(){
 	RCC.AHB1ENR |= 0x01;
 	GPIOA.MODER = (GPIOA.MODER & 0xFFC0FFFF) | 0x00150000;  // Initialisation des ports A8 (rouge), A9 (vert) et A10 (bleu)
@@ -109,40 +114,110 @@ void lose(){
 	}
 }
 
+void allumer (char lettre){
+	switch(lettre){
+		case'r':
+			LD1_red_on();
+			break; 
+		case 'b':
+			LD1_blue_on();
+			break; 
+		case 'v':
+			LD1_green_on();
+			break; 
+		case'm':
+			LD1_blue_on();
+			LD1_red_on();
+			break ;
+		default:
+			break; 
+	}
+}
+
+void eteindre (char lettre){
+		switch(lettre){
+		case'r':
+			LD1_red_off();
+			break; 
+		case 'b':
+			LD1_blue_off();
+			break; 
+		case 'v':
+			LD1_green_off();
+			break; 
+		case'm':
+			LD1_blue_off();
+			LD1_red_off();
+			break ;
+		default:
+			break; 
+	}
+}
+
+
 void __attribute__((interrupt)) SysTick_Handler(){
    /* Le fait de définir cette fonction suffit pour
 	 * qu'elle soit utilisée comme traitant,
 	 * cf les fichiers de compilation et d'édition de lien
 	 * pour plus de détails.
 	 */
-
-	switch(incr){
+	
+	switch(incr){	//incr = temps
 		case 0: // Allumer en rouge
-			LD1_red_on();
+			allumer (mot[0]); 
 			break;
 		case 1000: // Eteindre le rouge
-			LD1_red_off();
+			eteindre (mot[0]);
 			break;
 		case 1500: // Allumer en bleu
-			LD1_blue_on();
+			allumer (mot[1]); 
 			break;
 		case 2500: // Eteindre le bleu
-			LD1_blue_off();
+			eteindre (mot[1]);
 			break;
 		case 3000: // Allumer en vert
-			LD1_green_on();
+			allumer (mot[2]);
 			break;
 		case 4000: // Eteindre le vert
-			LD1_green_off();
+			eteindre (mot[2]);
 			break;
 		case 4500: // Allumer en magenta
-			LD1_red_on();
-			LD1_blue_on();
+			allumer(mot[3]); 
 			break;
 		case 5500: // Eteindre le magenta
-			LD1_red_off();
-			LD1_blue_off();
+			eteindre (mot[3]);
 			break;
+		case 6000:
+			if (strlen(mot)>4){allumer(mot[4]);} 
+			break;
+		case 7000:
+			if (strlen(mot)>4){eteindre (mot[4]);}
+			break; 
+		case 7500: 
+			if (strlen(mot)>5){allumer (mot[5]);}
+			break; 
+		case 8500:
+			if (strlen(mot)>5){eteindre (mot[5]);}
+			break; 
+		case 9000:
+			if (strlen(mot)>6){allumer (mot[6]);}
+			break;
+		case 10000:
+			if (strlen(mot)>6){eteindre (mot[6]);}
+			break;
+		case 10500:
+			if (strlen(mot)>7){allumer (mot[7]);}
+			break;
+		case 11500:
+			if (strlen(mot)>7){eteindre (mot[7]);}
+			break;
+		// case 12000:
+		// 	if (strlen(mot)==8){allumer (mot[7]);}
+		// 	break;
+		// case 13000:
+		// 	if (strlen(mot)==8){eteindre (mot[7]);}
+		// 	break;
+
 		/* case 6000: // Le joueur peut taper la séquence au clavier
 			_puts("Séquence tapée par le joueur : \n");
 			int n = 0;
@@ -151,7 +226,7 @@ void __attribute__((interrupt)) SysTick_Handler(){
 
 				n++;
 			}*/
-		case 13500: // 5500 + 8000 (8 secondes plus tard), on déclenche la défaite <= fin du prog
+		case 20500: // 11500+9000 (9 secondes plus tard), on déclenche la défaite <= fin du prog
 			lose();
 			exit(1);
 			break; 
@@ -170,10 +245,18 @@ void __attribute__((interrupt)) SysTick_Handler(){
 // Sinon, la LED s'allume 3 fois en vert pour indiquer que c'est gagné 
 
 int main(){
+
+
+	int index_mot = rand() % 4; 
+	mot = liste[index_mot];
+	int length = strlen(mot);
+
+
     init_LD1(); // Initialisation de la LED tricolore
 	systick_init(1000); // Interruption initialisée 
+ 
 	char seq[4] = "rbvm";
-	char *player = malloc(4*sizeof(char));
+	char *player = malloc(8*sizeof(char));
     while (1){
 		puts("Tapez au clavier la séquence de lumières : \n");
 		int i = 0;

@@ -2,10 +2,16 @@
 #include <math.h>
 #include <string.h>
 #include <stdlib.h>
+#include <time.h>
 #include "sys/cm4.h"
 #include "sys/devices.h"
 #include "sys/init.h"
 #include "sys/clock.h"
+
+//condition : taille de chaque seqquence est minimum egale a 4 maximum egale a 8
+char liste [6][10]={"rbv","rmvb","brbrm","vmrmvr","brmbrrvm", "mrvrmvmvbv"};
+char* mot; 
+
 
 void init_LD1(){
 	RCC.AHB1ENR |= 0x01;
@@ -15,6 +21,11 @@ void init_LD1(){
 	GPIOA.PUPDR &= 0xFFC0FFFF;
 	
     //GPIOA.MODER = GPIOA.MODER & ~(0x3F << 16); // Initialisation des ports A8 (rouge), A9 (vert) et A10 (bleu)
+}
+
+// Initialisation du mode du bouton poussoir
+void init_PB(){
+	GPIOC.MODER = GPIOC.MODER & ~(0x3<<26);
 }
 
 /* Initialisation du timer système (systick) */
@@ -89,6 +100,7 @@ void LD1_blue_off(){
 
 
 volatile int incr = 0;
+volatile int won = 0;
 
 void win(){
 	for(int i = 0; i < 3; i++){
@@ -109,83 +121,135 @@ void lose(){
 	}
 }
 
-void __attribute__((interrupt)) SysTick_Handler(){
-   /* Le fait de définir cette fonction suffit pour
-	 * qu'elle soit utilisée comme traitant,
-	 * cf les fichiers de compilation et d'édition de lien
-	 * pour plus de détails.
-	 */
 
-	switch(incr){
-		case 0: // Allumer en rouge
+void allumer (char lettre){
+	switch(lettre){
+		case 'r':
 			LD1_red_on();
-			break;
-		case 1000: // Eteindre le rouge
-			LD1_red_off();
-			break;
-		case 1500: // Allumer en bleu
-			LD1_blue_on();
-			break;
-		case 2500: // Eteindre le bleu
-			LD1_blue_off();
-			break;
-		case 3000: // Allumer en vert
-			LD1_green_on();
-			break;
-		case 4000: // Eteindre le vert
-			LD1_green_off();
-			break;
-		case 4500: // Allumer en magenta
-			LD1_red_on();
-			LD1_blue_on();
-			break;
-		case 5500: // Eteindre le magenta
-			LD1_red_off();
-			LD1_blue_off();
-			break;
-		/* case 6000: // Le joueur peut taper la séquence au clavier
-			_puts("Séquence tapée par le joueur : \n");
-			int n = 0;
-			while (n < 4){
-				char c = _getc();
-
-				n++;
-			}*/
-		case 13500: // 5500 + 8000 (8 secondes plus tard), on déclenche la défaite <= fin du prog
-			lose();
-			exit(1);
 			break; 
-
+		case 'b':
+			LD1_blue_on();
+			break; 
+		case 'v':
+			LD1_green_on();
+			break; 
+		case 'm':
+			LD1_blue_on();
+			LD1_red_on();
+			break ;
+		default:
+			break; 
 	}
-  
-  incr = incr + 1;
+}
+
+void eteindre (char lettre){
+		switch(lettre){
+		case 'r':
+			LD1_red_off();
+			break; 
+		case 'b':
+			LD1_blue_off();
+			break; 
+		case 'v':
+			LD1_green_off();
+			break; 
+		case 'm':
+			LD1_blue_off();
+			LD1_red_off();
+			break ;
+		default:
+			break; 
+	}
+}
+
+
+volatile int i = 0;
+volatile int length;
+volatile int on = 1;
+
+void __attribute__((interrupt)) SysTick_Handler(){
+
+	if (won) { // Si on gagne, on ré-initialise le compteur incr pour commencer une nouvelle séquence
+		won = 0;
+		incr = 0;
+		i = 0;
+	}
+
+	if (incr == 15000){ // Compteur maximum atteint (15 secondes)
+		lose();
+		exit(1);
+	}
+	else if (on && (incr % 500 == 0) && i < length) { // On allume
+		allumer(mot[i]);
+		on = 0;
+	}
+	else if (!on &&(incr % 1000 == 0) && i < length){ // On éteint
+		eteindre(mot[i]);
+		on = 1;
+		i++;
+	}
+
+	incr++;
+}
+
+int button_appuye(int button){
+  if (button != 0) return 0;
+  return 1;
+}
+
+// Cette fonction permet au joueur de commencer le jeu, une fois que le bouton poussoir a été appuyé.
+void start(){
+	init_PB(); // Initialisation du bouton poussoir
+	int button; 
+
+	puts("Appuyez sur le bouton poussoir pour débuter le jeu\n");
+
+	while (1){
+		button = GPIOC.IDR & 0x1<<13;
+		if (button_appuye(button)){ 
+			tempo_500ms();
+			return;
+		}
+	}
 }
 
 
 // On fait clignoter la LED grâce aux interruptions (1 seconde allumée, 1/2 éteinte, jusqu'à ce que la séquence à reproduire soit terminée)
 
-// La séquence générée dure 4*1s + 4* 0,5s = 4+2 = 6 secondes 
-// Le joueur a 8 secondes pour reproduire la séquence, après la fin de celle-ci
 // Si le joueur se trompe, c'est la fin : il faut relancer le programme pour rejouer (la LED s'allume 3 fois en rouge)
 // Sinon, la LED s'allume 3 fois en vert pour indiquer que c'est gagné 
 
 int main(){
+	start();
+
+	int index_mot = 0; 
+	mot = liste[index_mot];
+	length = strlen(mot); // Longueur de séquence
+
     init_LD1(); // Initialisation de la LED tricolore
 	systick_init(1000); // Interruption initialisée 
-	char seq[4] = "rbvm";
-	char *player = malloc(4*sizeof(char));
+
+	char *player = malloc(strlen(mot)*sizeof(char));
+
     while (1){
 		puts("Tapez au clavier la séquence de lumières : \n");
 		int i = 0;
-		while (i < 4){
+		length = strlen(mot); // Longueur de séquence
+
+		while (i < length){
 			char c = _getc();
 			player[i] = c;
 			i++;
 		}
+		
+		// Affichage du mot proposé par le joueur
+		printf("Mot du joueur : %s\n", player);
+
 		// Victoire ou défaite du joueur
-		if (strcmp(seq, player) == 0){ // Si la séquence tapée est correcte, le joueur a gagné
-			win(); // gagne
-			return 0;
+		if (strcmp(mot, player) == 0){ // Si la séquence tapée est correcte, le joueur a gagné
+			win(); 
+			won = 1;
+			mot = liste[index_mot++];
 		}
 		else{ // Défaite
 			lose();
